@@ -8,9 +8,13 @@ module.exports = {
 
         const ongName = await connection('ongs')
             .where('id', id)
-            .select('name');
+            .select('name')
+            .first();
 
-            return response.json(ongName)
+        if (!ongName){
+            return response.status(400).send();
+        }    
+        return response.json(ongName)
 
     }
 
